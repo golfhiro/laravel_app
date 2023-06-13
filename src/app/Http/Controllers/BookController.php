@@ -28,9 +28,14 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+        $inputs=$request->validate([
+            'title'=>'required|max:30',
+            'description'=>'required|1000',
+            'image'=>'image|max:1024'
+        ]);
         $book=new Book();
-        $book->title = $request->title;
-        $book->description = $request->description;
+            $book->title=$inputs['title'];
+            $book->description=$inputs['description'];
         $book->url = $request->url;
         $book->user_id = auth()->user()->id;
         $book->save();
