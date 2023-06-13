@@ -4,7 +4,11 @@ ENV TZ Azia/Tokyo
 
 RUN apt-get update && apt-get install -y \
   git unzip libzip-dev libicu-dev libonig-dev && \
-  docker-php-ext-install intl pdo_mysql zip bcmath
+  docker-php-ext-install intl pdo_mysql zip bcmath && \
+  apt-get install -y gnupg2 && \
+  curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
+  apt-get install -y nodejs
+
 
 COPY ./docker/php/php.ini /usr/local/etc/php/php.ini
 
