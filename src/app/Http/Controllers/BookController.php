@@ -30,7 +30,7 @@ class BookController extends Controller
     {
         $inputs=$request->validate([
             'title'=>'required|max:30',
-            'description'=>'required|1000',
+            'description'=>'required|max:1000',
             'image'=>'image|max:1024'
         ]);
         $book=new Book();
@@ -38,6 +38,12 @@ class BookController extends Controller
             $book->description=$inputs['description'];
         $book->url = $request->url;
         $book->user_id = auth()->user()->id;
+        if (request('image')) {
+            $original = request()->file('image')->getClientOriginalName();
+            $name = date('Ymd_His') . '_' . $original;
+            request()->file('image')->move('storage/images', $name);
+            $book->image = $name;
+        }
         $book->save();
         return redirect()->route('book.create')->with('message', '投稿を作成しました');
     }
