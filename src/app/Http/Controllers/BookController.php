@@ -20,7 +20,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        return view('book.create');
     }
 
     /**
@@ -28,7 +28,13 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $book=new Book();
+        $book->title = $request->title;
+        $book->description = $request->description;
+        $book->url = $request->url;
+        $book->user_id = auth()->user()->id;
+        $book->save();
+        return redirect()->route('book.create')->with('message', '投稿を作成しました');
     }
 
     /**
