@@ -18,8 +18,6 @@ class BookController extends Controller
             $query->where('title', 'like', '%' . $search . '%');
         }
 
-        // $books = $query->get();
-        // $books = Book::orderByDesc('created_at')->paginate(10);
         $books = $query->orderByDesc('created_at')->paginate(5);
 
         return view('book.index', compact('books', 'user', 'search'));
@@ -35,7 +33,6 @@ class BookController extends Controller
         $inputs=$request->validate([
             'title'=>'required|max:100',
             'description'=>'required|max:1000',
-            // 'image'=>'image|max:1024'
         ]);
         $book=new Book();
             $book->title=$inputs['title'];
@@ -54,7 +51,8 @@ class BookController extends Controller
 
     public function show(Book $book)
     {
-        return view('book.show', compact('book'));
+        $user = auth()->user();
+        return view('book.show', compact('book', 'user'));
     }
 
     public function edit(Book $book)
@@ -67,7 +65,6 @@ class BookController extends Controller
         $inputs=$request->validate([
             'title' => 'required|max:100',
             'description' => 'required|max:1000'
-            // 'image' => 'image|max:1024'
         ]);
 
         $book->title=$inputs['title'];

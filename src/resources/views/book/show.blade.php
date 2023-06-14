@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            投稿の個別表示
+            詳細画面
         </h2>
 
         <x-message :message="session('message')" />
@@ -18,14 +18,17 @@
                         </h1>
                         <hr class="w-full">
                     </div>
-                    <div class="flex justify-end mt-4">
-                        <a href="{{route('book.edit', $book)}}"><x-primary-button class="bg-teal-700 float-right">編集</x-primary-button></a>
-                        <form method="post" action="{{route('book.destroy', $book)}}">
-                        @csrf
-                        @method('delete')
-                            <x-primary-button class="bg-red-700 float-right ml-4" onClick="return confirm('本当に削除しますか？');">削除</x-primary-button>
-                        </form>
-                    </div>
+                    @if ($book->user_id === $user->id)
+                        <div class="flex justify-end mt-4">
+                            <a href="{{route('book.edit', $book)}}">
+                                <x-primary-button class="bg-teal-700 float-right">編集</x-primary-button></a>
+                            <form method="post" action="{{route('book.destroy', $book)}}">
+                            @csrf
+                            @method('delete')
+                                <x-primary-button class="bg-red-700 float-right ml-4" onClick="return confirm('本当に削除しますか？');">削除</x-primary-button>
+                            </form>
+                        </div>
+                    @endif
                     @if($book->image)
                     <img src="{{ asset('storage/images/'.$book->image)}}" class="mx-auto" style="height:300px;">
                     @endif
