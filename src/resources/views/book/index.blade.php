@@ -1,15 +1,28 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            投稿の一覧
+            技術本一覧
         </h2>
-
         <x-message :message="session('message')" />
-
     </x-slot>
+
 
     {{-- 投稿一覧表示用のコード --}}
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {{-- 検索用のコード --}}
+        <form method="GET" action="{{ url()->current() }}" class="flex items-center mt-10">
+            <input type="search" placeholder="本のタイトルを入力" name="search" value="@if (isset($search)) {{ $search }} @endif" class="border border-gray-300 rounded-l-md px-4 py-2 focus:outline-none focus:ring focus:border-blue-500 w-5/6">
+            <div>
+                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded-r-md ml-2">検索</button>
+            </div>
+            <div>
+                <button>
+                    <a href="{{ route('book.index') }}" class="text-gray-600 ml-2 hover:underline">クリア</a>
+                </button>
+            </div>
+        </form>
+        {{-- 検索用のコード終了 --}}
+
         @foreach ($books as $book)
         <div class="mx-4 sm:p-8">
             <div class="mt-4">

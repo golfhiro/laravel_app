@@ -7,11 +7,21 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $books=Book::orderBy('created_at','desc')->get();
-        $user=auth()->user();
-        return view('book.index', compact('books', 'user'));
+        $books = Book::orderBy('created_at','desc')->get();
+        $user = auth()->user();
+
+        $search = $request->input('search');
+        $query = Book::query();
+
+        if ($search) {
+            $query->where('title', 'like', '%' . $search . '%');
+        }
+
+        $books = $query->get();
+
+        return view('book.index', compact('books', 'user', 'search'));
     }
 
     public function create()
@@ -22,7 +32,7 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $inputs=$request->validate([
-            'title'=>'required|max:30',
+            'title'=>'required|max:100',
             'description'=>'required|max:1000',
             // 'image'=>'image|max:1024'
         ]);
@@ -54,7 +64,7 @@ class BookController extends Controller
     public function update(Request $request, Book $book)
     {
         $inputs=$request->validate([
-            'title' => 'required|max:30',
+            'title' => 'required|max:100',
             'description' => 'required|max:1000'
             // 'image' => 'image|max:1024'
         ]);
