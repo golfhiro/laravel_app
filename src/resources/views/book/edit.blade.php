@@ -26,7 +26,7 @@
                     <textarea name="description" class="w-auto py-2 border border-gray-300 rounded-md" id="description" cols="30" rows="10">{{old('description', $book->description)}}</textarea>
                 </div>
 
-                <div class="w-full flex flex-col">
+                <div class="w-full flex flex-col mt-10">
                     @if($book->image)
                     <img src="{{ asset('storage/images/'.$book->image)}}" class="mx-auto" style="height:300px;">
                     @endif
@@ -37,8 +37,15 @@
                     </div>
                 </div>
 
+                <div class="md:flex items-center mt-8">
+                    <div class="w-full flex flex-col">
+                        <label for="url" class="font-semibold leading-none mt-4">URL</label>
+                        <input type="text" name="url" class="w-auto py-2 border border-gray-300 rounded-md" id="url" value="{{old('url', $book->url)}}" placeholder="Enter Title">
+                    </div>
+                </div>
+
                 <x-primary-button class="mt-4">
-                    更新する
+                    変更する
                 </x-primary-button>
 
             </form>

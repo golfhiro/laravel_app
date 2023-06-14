@@ -20,7 +20,7 @@ class BookController extends Controller
 
         // $books = $query->get();
         // $books = Book::orderByDesc('created_at')->paginate(10);
-        $books = $query->orderByDesc('created_at')->paginate(10);
+        $books = $query->orderByDesc('created_at')->paginate(5);
 
         return view('book.index', compact('books', 'user', 'search'));
     }
@@ -49,7 +49,7 @@ class BookController extends Controller
             $book->image = $name;
         }
         $book->save();
-        return redirect()->route('book.create')->with('message', '投稿を作成しました');
+        return redirect()->route('book.index')->with('message', '投稿を作成しました');
     }
 
     public function show(Book $book)
