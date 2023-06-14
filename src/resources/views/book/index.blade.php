@@ -6,10 +6,7 @@
         <x-message :message="session('message')" />
     </x-slot>
 
-
-    {{-- 投稿一覧表示用のコード --}}
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {{-- 検索用のコード --}}
         <form method="GET" action="{{ url()->current() }}" class="flex items-center mt-10">
             <input type="search" placeholder="本のタイトルを入力" name="search" value="@if (isset($search)) {{ $search }} @endif" class="border border-gray-300 rounded-l-md px-4 py-2 focus:outline-none focus:ring focus:border-blue-500 w-5/6">
             <div>
@@ -21,31 +18,26 @@
                 </button>
             </div>
         </form>
-        {{-- 検索用のコード終了 --}}
 
-        @foreach ($books as $book)
-        <div class="mx-4 sm:p-8">
-            <div class="mt-4">
-                <div class="bg-white w-full  rounded-2xl px-10 py-8 shadow-lg hover:shadow-2xl transition duration-500">
-                    <div class="mt-4">
-                        <h1 class="text-lg text-gray-700 font-semibold hover:underline cursor-pointer float-left pt-4">
-                            <a href="{{route('book.show', $book)}}">{{ $book->title }}</a>
-                        </h1>
-                        <hr class="w-full">
-                        <hr class="w-full">
-                        @if($book->image)
-                        <img src="{{ asset('storage/images/'.$book->image)}}" class="mx-auto" style="height:300px;">
-                        @endif
-                        <p class="mt-4 text-gray-600 py-4">{{$book->description}}</p>
-                        <p class="mt-4 text-gray-600 py-4">{{$book->url}}</p>
-                        <div class="text-sm font-semibold flex flex-row-reverse">
-                            <p> {{ $book->user->name }} • {{$book->created_at->format('Y年m月d日')}}</p>
-                        </div>
+        <div class="mt-10 grid grid-cols-2 gap-8">
+            @foreach ($books as $book)
+            <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition duration-500">
+                <div class="p-8">
+                    <h1 class="text-lg text-gray-700 font-semibold hover:underline cursor-pointer">
+                        <a href="{{ route('book.show', $book) }}">{{ $book->title }}</a>
+                    </h1>
+                    <hr class="my-4">
+                    @if($book->image)
+                    <img src="{{ asset('storage/images/'.$book->image) }}" class="mx-auto my-6" style="height:300px;">
+                    @endif
+                    <div class="text-sm font-semibold flex justify-end">
+                        <p>{{ $book->user->name }} • {{ $book->created_at->format('Y年m月d日') }}</p>
                     </div>
                 </div>
             </div>
+            @endforeach
         </div>
-        @endforeach
+
         <div class="mt-6 mb-10">
             {{ $books->links('vendor.pagination.tailwind2') }}
         </div>
