@@ -42,7 +42,7 @@
                         </x-dropdown-link>
 
                         <!-- Authentication -->
-                        <form method="book" action="{{ route('logout') }}">
+                        <form method="post" action="{{ route('logout') }}">
                             @csrf
 
                             <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
@@ -89,7 +89,7 @@
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
-                <form method="book" action="{{ route('logout') }}">
+                <form method="post" action="{{ route('logout') }}">
                     @csrf
 
                     <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
