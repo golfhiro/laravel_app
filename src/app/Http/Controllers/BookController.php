@@ -12,7 +12,9 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        $books=Book::orderBy('created_at','desc')->get();
+        $user=auth()->user();
+        return view('book.index', compact('books', 'user'));
     }
 
     /**
