@@ -46,5 +46,8 @@
             </div>
         </div>
         @endforeach
+        <div class="mt-6 mb-10">
+            {{ $books->links('vendor.pagination.tailwind2') }}
+        </div>
     </div>
 </x-app-layout>

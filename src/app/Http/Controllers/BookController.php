@@ -9,7 +9,6 @@ class BookController extends Controller
 {
     public function index(Request $request)
     {
-        $books = Book::orderBy('created_at','desc')->get();
         $user = auth()->user();
 
         $search = $request->input('search');
@@ -19,7 +18,9 @@ class BookController extends Controller
             $query->where('title', 'like', '%' . $search . '%');
         }
 
-        $books = $query->get();
+        // $books = $query->get();
+        // $books = Book::orderByDesc('created_at')->paginate(10);
+        $books = $query->orderByDesc('created_at')->paginate(10);
 
         return view('book.index', compact('books', 'user', 'search'));
     }
