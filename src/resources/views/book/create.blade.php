@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="w-full flex flex-col">
-                    <label for="image" class="font-semibold leading-none mt-4">画像 （1MBまで） </label>
+                    <label for="image" class="font-semibold leading-none mt-4">画像 （3MBまで） </label>
                     <div>
                         <input id="image" type="file" name="image">
                     </div>
