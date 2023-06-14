@@ -7,11 +7,20 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $books=Book::orderBy('created_at','desc')->get();
-        $user=auth()->user();
-        return view('book.index', compact('books', 'user'));
+        $user = auth()->user();
+
+        $search = $request->input('search');
+        $query = Book::query();
+
+        if ($search) {
+            $query->where('title', 'like', '%' . $search . '%');
+        }
+
+        $books = $query->orderByDesc('created_at')->paginate(8);
+
+        return view('book.index', compact('books', 'user', 'search'));
     }
 
     public function create()
@@ -22,9 +31,8 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $inputs=$request->validate([
-            'title'=>'required|max:30',
+            'title'=>'required|max:100',
             'description'=>'required|max:1000',
-            // 'image'=>'image|max:1024'
         ]);
         $book=new Book();
             $book->title=$inputs['title'];
@@ -38,12 +46,13 @@ class BookController extends Controller
             $book->image = $name;
         }
         $book->save();
-        return redirect()->route('book.create')->with('message', '投稿を作成しました');
+        return redirect()->route('book.index')->with('message', '投稿を作成しました');
     }
 
     public function show(Book $book)
     {
-        return view('book.show', compact('book'));
+        $user = auth()->user();
+        return view('book.show', compact('book', 'user'));
     }
 
     public function edit(Book $book)
@@ -54,9 +63,8 @@ class BookController extends Controller
     public function update(Request $request, Book $book)
     {
         $inputs=$request->validate([
-            'title' => 'required|max:30',
+            'title' => 'required|max:100',
             'description' => 'required|max:1000'
-            // 'image' => 'image|max:1024'
         ]);
 
         $book->title=$inputs['title'];

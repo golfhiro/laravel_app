@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            投稿の新規作成
+            技術書の新規登録
         </h2>
 
         <!-- バリデーションエラー時のメッセージ -->
@@ -39,7 +39,7 @@
                 </div>
 
                 <x-primary-button class="mt-4">
-                    送信する
+                    投稿
                 </x-primary-button>
 
             </form>
