@@ -84,6 +84,7 @@ class BookController extends Controller
 
     public function destroy(Book $book)
     {
+        $book->comments()->delete();
         $book->delete();
         return redirect()->route('book.index')->with('message', '投稿を削除しました');
     }
