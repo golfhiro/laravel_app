@@ -32,18 +32,45 @@
                     <img src="{{ asset('storage/images/'.$book->image) }}" class="mx-auto my-4" style="height:300px;">
                     @endif
                     <div>
-                        <h2 class="text-lg font-semibold">おすすめする理由</h2> <!-- タイトルを追加 -->
+                        <h2 class="text-lg font-semibold">おすすめする理由</h2>
                         <p class="mt-4 text-gray-600 py-4 whitespace-pre-line">{{ $book->description }}</p>
                     </div>
                     <div>
-                        <h2 class="text-lg font-semibold">URL</h2> <!-- タイトルを追加 -->
-                        <p class=" text-gray-600 py-4 whitespace-pre-line">{{ $book->url }}</p>
+                        <h2 class="text-lg font-semibold">URL</h2>
+                        <p class="text-gray-600 py-4 whitespace-pre-line">{{ $book->url }}</p>
                     </div>
                     <div class="text-sm font-semibold flex justify-end">
                         <p>{{ $book->user->name }} • {{ $book->created_at->diffForHumans() }}</p>
                     </div>
                 </div>
             </div>
+        </div>
+
+        @foreach ($book->comments as $comment)
+        <div class="bg-white rounded-lg shadow-md mb-4 p-4">
+            <div class="flex items-center mb-2">
+                <span class="text-gray-700 font-semibold">{{ $comment->user->name ?? '削除されたユーザー' }}</span>
+            </div>
+            <div class="text-gray-800 mb-4">
+                {{ $comment->body }}
+            </div>
+            <div class="text-gray-500 text-sm text-right">
+                投稿日時 {{ $comment->created_at->diffForHumans() }}
+            </div>
+        </div>
+        @endforeach
+
+        <div class="bg-white rounded-lg shadow-md mb-4 p-4">
+            <form method="post" action="{{ route('comment.store') }}">
+                @csrf
+                <input type="hidden" name="book_id" value="{{ $book->id }}">
+                <div class="mb-4">
+                    <textarea name="body" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200" rows="5" placeholder="コメントを入力する">{{ old('body') }}</textarea>
+                </div>
+                <div class="text-right">
+                    <button type="submit" class="px-4 py-2 bg-indigo-500 text-white font-semibold rounded-md hover:bg-indigo-600">コメントする</button>
+                </div>
+            </form>
         </div>
     </div>
 </x-app-layout>

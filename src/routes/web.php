@@ -32,4 +32,6 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('book', BookController::class);
 
+Route::post('/book/comment/store', [App\Http\Controllers\CommentController::class, 'store'])->name('comment.store');
+
 require __DIR__.'/auth.php';
