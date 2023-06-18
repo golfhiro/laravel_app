@@ -46,20 +46,25 @@
             </div>
         </div>
 
-        @foreach ($book->comments as $comment)
-        <div class="bg-white rounded-lg shadow-md mb-4 p-4">
-            <div class="flex items-center mb-2">
-                <span class="text-gray-700 font-semibold">{{ $comment->user->name ?? '削除されたユーザー' }}</span>
+        @if($book->comments->count() > 0)
+            @foreach($book->comments as $comment)
+            <div class="bg-white rounded-lg shadow-md mb-4 p-4">
+                <div class="flex items-center mb-2">
+                    <span class="text-gray-700 font-semibold">{{ $comment->user->name ?? '削除されたユーザー' }}</span>
+                </div>
+                <div class="text-gray-800 mb-4">
+                    {{ $comment->body }}
+                </div>
+                <div class="text-gray-500 text-sm text-right">
+                    投稿日時 {{ $comment->created_at->diffForHumans() }}
+                </div>
             </div>
-            <div class="text-gray-800 mb-4">
-                {{ $comment->body }}
+            @endforeach
+        @else
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <p class="text-gray-700">コメントはまだありません。</p>
             </div>
-            <div class="text-gray-500 text-sm text-right">
-                投稿日時 {{ $comment->created_at->diffForHumans() }}
-            </div>
-        </div>
-        @endforeach
-
+        @endif
         <div class="bg-white rounded-lg shadow-md mb-4 p-4">
             <form method="post" action="{{ route('comment.store') }}">
                 @csrf
