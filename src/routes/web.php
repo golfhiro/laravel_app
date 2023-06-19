@@ -34,4 +34,8 @@ Route::resource('book', BookController::class);
 
 Route::post('/book/comment/store', [App\Http\Controllers\CommentController::class, 'store'])->name('comment.store');
 
+Route::get('tag/export', [App\Http\Controllers\TagController::class, 'export']);
+Route::get('tag/download1', [App\Http\Controllers\TagController::class, 'download1']); //ダウンロード
+
+
 require __DIR__.'/auth.php';
