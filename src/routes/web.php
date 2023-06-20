@@ -34,4 +34,10 @@ Route::resource('book', BookController::class);
 
 Route::post('/book/comment/store', [App\Http\Controllers\CommentController::class, 'store'])->name('comment.store');
 
+Route::get('tag/export', [App\Http\Controllers\TagController::class, 'export']);
+Route::get('tag/download', [App\Http\Controllers\TagController::class, 'download']); //ダウンロード
+
+Route::get('csv/upload', [App\Http\Controllers\CsvUploadController::class, 'index']); //表示
+Route::post('csv/upload', [App\Http\Controllers\CsvUploadController::class, 'upload_regist']);//登録
+
 require __DIR__.'/auth.php';
