@@ -9,7 +9,7 @@ use Goodby\CSV\Import\Standard\Lexer;
 use Goodby\CSV\Import\Standard\Interpreter;
 
 
-class CsvUplodController extends Controller
+class CsvUploadController extends Controller
 {
     public function index()
     {

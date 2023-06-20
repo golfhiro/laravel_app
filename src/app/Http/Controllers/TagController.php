@@ -18,7 +18,7 @@ class TagController extends Controller
         return view('tag.export')->with($hash);
     }
 
-    public function download1()
+    public function download()
     {
         // 出力項目定義
         $csvlist = $this->csvcolmns();
