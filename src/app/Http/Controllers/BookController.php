@@ -46,7 +46,7 @@ class BookController extends Controller
             $book->image = $name;
         }
         $book->save();
-        return redirect()->route('book.index')->with('message', '投稿を作成しました');
+        return redirect()->route('book.index')->with('message', '投稿しました');
     }
 
     public function show(Book $book)
