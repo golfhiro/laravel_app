@@ -1,4 +1,4 @@
-<img width="869" alt="スクリーンショット 2023-06-21 20 22 52" src="https://github.com/golfhiro/a/assets/90959073/999acdc8-4a94-4377-873d-d5de7e051db7">
+<img width="869" alt="スクリーンショット 2023-06-21 20 22 52" src="https://github.com/golfhiro/laravel_app/assets/90959073/37f3b758-c9eb-440d-8cf4-dbe7b94a82ee">
 
 # サービス概要
 未経験エンジニア・新人エンジニにおすすめの参考書を投稿し、紹介するサービです
