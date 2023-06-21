@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Bookmark;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, Book $book)
     {
         $user = auth()->user();
 
@@ -19,7 +20,6 @@ class BookController extends Controller
         }
 
         $books = $query->orderByDesc('created_at')->paginate(8);
-
         return view('book.index', compact('books', 'user', 'search'));
     }
 
@@ -52,7 +52,10 @@ class BookController extends Controller
     public function show(Book $book)
     {
         $user = auth()->user();
-        return view('book.show', compact('book', 'user'));
+
+        $bookmark = Bookmark::where('book_id', $book->id)->where('user_id', auth()->user()->id)->first();
+
+        return view('book.show', compact('book', 'user', 'bookmark'));
     }
 
     public function edit(Book $book)

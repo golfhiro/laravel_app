@@ -18,6 +18,11 @@ class Book extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function bookmarks()
+    {
+        return $this->hasMany(Bookmark::class);
+    }
+
     protected $fillable = [
         'title',
         'description',
