@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
-
+use App\Http\Controllers\BookmarkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,5 +39,8 @@ Route::get('tag/download', [App\Http\Controllers\TagController::class, 'download
 
 Route::get('csv/upload', [App\Http\Controllers\CsvUploadController::class, 'index']); //表示
 Route::post('csv/upload', [App\Http\Controllers\CsvUploadController::class, 'upload_regist']);//登録
+
+Route::get('/book/bookmark/{book}', [BookmarkController::class, 'bookmark'])->name('bookmark');
+Route::get('/book/unbookmark/{book}', [BookmarkController::class, 'unbookmark'])->name('unbookmark');
 
 require __DIR__.'/auth.php';
