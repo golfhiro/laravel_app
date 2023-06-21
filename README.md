@@ -19,13 +19,11 @@
 
 # 機能
 ### 新規登録、投稿
-
-https://github.com/golfhiro/a/assets/90959073/ff429b8a-7701-4604-949a-d832be5ae74e
+https://github.com/golfhiro/laravel_app/assets/90959073/51b282ea-4b24-4d6a-a115-ef5b02300edd
 
 ### いいね
-
-https://github.com/golfhiro/a/assets/90959073/3f3262ea-3fa7-432d-ab72-bd4b45c1a437
+https://github.com/golfhiro/laravel_app/assets/90959073/fd4ea30f-47d1-46a0-be2a-eac1bbe84758
 
 ### コメント投稿、投稿削除
+https://github.com/golfhiro/laravel_app/assets/90959073/a6c018ea-85f4-4198-93a1-635a8a896706
 
-https://github.com/golfhiro/a/assets/90959073/e5eb8ae0-52b5-429a-94d9-b5a569f82b03
