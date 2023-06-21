@@ -25,6 +25,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Bookmark::class);
     }
+
     /**
      * The attributes that are mass assignable.
      *

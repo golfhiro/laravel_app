@@ -23,7 +23,6 @@ class Book extends Model
         return $this->hasMany(Bookmark::class);
     }
 
-
     protected $fillable = [
         'title',
         'description',
