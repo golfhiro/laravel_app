@@ -27,6 +27,7 @@
                         <a href="{{ route('book.show', $book) }}">{{ $book->title }}</a>
                     </h1>
                     <hr class="my-4">
+                    <span class="inline-block bg-violet-600 text-white text-sm font-bold px-2 py-1 rounded-full">{{ $book->tag->name }}</span>
                     @if($book->image)
                     <img src="{{ asset('storage/images/'.$book->image) }}" class="mx-auto my-6" style="height:300px;">
                     @endif

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Tag;
 use App\Models\Bookmark;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,8 @@ class BookController extends Controller
 
     public function create()
     {
-        return view('book.create');
+        $tags = Tag::all();
+        return view('book.create', compact('tags'));
     }
 
     public function store(Request $request)
@@ -33,11 +35,13 @@ class BookController extends Controller
         $inputs=$request->validate([
             'title'=>'required|max:100',
             'description'=>'required|max:1000',
+            'tags' => 'array',
         ]);
-        $book=new Book();
-            $book->title=$inputs['title'];
-            $book->description=$inputs['description'];
+        $book = new Book();
+        $book->title=$inputs['title'];
+        $book->description=$inputs['description'];
         $book->url = $request->url;
+        $book->tag_id = $request->tag_id;
         $book->user_id = auth()->user()->id;
         if (request('image')) {
             $original = request()->file('image')->getClientOriginalName();
