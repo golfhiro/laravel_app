@@ -10,7 +10,7 @@
         <form method="GET" action="{{ url()->current() }}" class="flex items-center mt-10">
             <input type="search" placeholder="本のタイトルを入力" name="search" value="@if (isset($search)) {{ $search }} @endif" class="border border-gray-300 rounded-l-md px-4 py-2 focus:outline-none focus:ring focus:border-blue-500 w-5/6">
             <div>
-                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded-r-md ml-2">検索</button>
+                <button type="submit" class="bg-sky-500 hover:bg-sky-700 text-white font-semibold px-4 py-2 rounded-r-md ml-2">検索</button>
             </div>
             <div>
                 <button>
@@ -27,14 +27,16 @@
                         <a href="{{ route('book.show', $book) }}">{{ $book->title }}</a>
                     </h1>
                     <hr class="my-4">
-                    <span class="inline-block bg-violet-600 text-white text-sm font-bold px-2 py-1 rounded-full">{{ $book->tag->name }}</span>
+                    <div class="text-right">
+                        <span class="inline-block bg-violet-600 text-white text-sm font-bold px-2 py-1 rounded-full">{{ $book->tag->name }}</span>
+                    </div>
                     @if($book->image)
                     <img src="{{ asset('storage/images/'.$book->image) }}" class="mx-auto my-6" style="height:300px;">
                     @endif
                     <div class="text-sm font-semibold flex justify-end">
                         <p>{{ $book->user->name }} • {{ $book->created_at->format('Y年m月d日') }}</p>
                     </div>
-                    <span class="badge">いいね数：{{ $book->bookmarks->count() }}</span>
+                    <span class="badge"> {{ $book->bookmarks->count() }} いいね</span>
                 </div>
             </div>
             @endforeach

@@ -20,7 +20,7 @@ class BookController extends Controller
             $query->where('title', 'like', '%' . $search . '%');
         }
 
-        $books = $query->orderByDesc('created_at')->paginate(8);
+        $books = $query->orderByDesc('created_at')->paginate(6);
         return view('book.index', compact('books', 'user', 'search'));
     }
 
