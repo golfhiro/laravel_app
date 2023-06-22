@@ -36,7 +36,7 @@
                     <div class="text-sm font-semibold flex justify-end">
                         <p>{{ $book->user->name }} • {{ $book->created_at->format('Y年m月d日') }}</p>
                     </div>
-                    <span class="badge">いいね数：{{ $book->bookmarks->count() }}</span>
+                    <span class="badge"> {{ $book->bookmarks->count() }} いいね</span>
                 </div>
             </div>
             @endforeach
