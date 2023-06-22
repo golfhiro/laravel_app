@@ -10,7 +10,7 @@
         <form method="GET" action="{{ url()->current() }}" class="flex items-center mt-10">
             <input type="search" placeholder="本のタイトルを入力" name="search" value="@if (isset($search)) {{ $search }} @endif" class="border border-gray-300 rounded-l-md px-4 py-2 focus:outline-none focus:ring focus:border-blue-500 w-5/6">
             <div>
-                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded-r-md ml-2">検索</button>
+                <button type="submit" class="bg-sky-500 hover:bg-sky-700 text-white font-semibold px-4 py-2 rounded-r-md ml-2">検索</button>
             </div>
             <div>
                 <button>
