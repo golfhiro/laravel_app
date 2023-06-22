@@ -19,7 +19,7 @@
 
 # 機能
 ### 新規登録、投稿
-https://github.com/golfhiro/laravel_app/assets/90959073/51b282ea-4b24-4d6a-a115-ef5b02300edd
+https://github.com/golfhiro/laravel_app/assets/90959073/ef9706b5-f6d7-473f-b63c-51b1131e9524
 
 ### いいね
 https://github.com/golfhiro/laravel_app/assets/90959073/fd4ea30f-47d1-46a0-be2a-eac1bbe84758
