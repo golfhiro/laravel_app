@@ -3,13 +3,13 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             技術書の新規登録
         </h2>
-
         <!-- バリデーションエラー時のメッセージ -->
         <x-validation-errors class="mb-4" :errors="$errors" />
 
         <!-- 投稿成功時のメッセージ -->
         <x-message :message="session('message')" />
     </x-slot>
+
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="mx-4 sm:p-8">
             <form method="POST" action="{{route('book.store')}}" enctype="multipart/form-data">
@@ -24,6 +24,16 @@
                 <div class="w-full flex flex-col">
                     <label for="description" class="font-semibold leading-none mt-4">説明</label>
                     <textarea name="description" class="w-auto py-2 border border-gray-300 rounded-md" id="body" cols="30" rows="10" placeholder="おすすめする理由を入力してください">{{old('description')}}</textarea>
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <label for="tag_id" class="font-semibold mt-4">技術タグ</label>
+                    <select class="form-select w-auto py-2 px-4 border border-gray-300 rounded-md" name="tag_id" required>
+                        <option value="disabled selected">必ず選択していください</option>
+                        @foreach($tags as $tag)
+                        <option value="{{ $tag->id }}" @if (isset($book->tag_id) && ($book->tag_id === $tag->id)) selected @endif>{{ $tag->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="w-full flex flex-col">

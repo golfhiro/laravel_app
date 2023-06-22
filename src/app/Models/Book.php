@@ -23,6 +23,11 @@ class Book extends Model
         return $this->hasMany(Bookmark::class);
     }
 
+    public function tag()
+    {
+        return $this->belongsTo(Tag::class);
+    }
+
     protected $fillable = [
         'title',
         'description',
