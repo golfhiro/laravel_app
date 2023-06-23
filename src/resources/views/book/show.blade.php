@@ -44,15 +44,15 @@
                     </div>
                     <!-- いいねボタン -->
                     @if($bookmark)
-                    <a href="{{ route('unbookmark', $book) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
-                        いいね！
-                        <span class="badge"> {{ $book->bookmarks->count() }}</span>
-                    </a>
+                    <button class="bookmark bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" onclick="unbookmark('{{ $book->id }}')">
+                        いいね解除！
+                        <span class="badge">{{ $book->bookmarks->count() }}</span>
+                    </button>
                     @else
-                    <a href="{{ route('bookmark', $book) }}" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                    <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" onclick="bookmark('{{ $book->id }}')">
                         いいね！
                         <span class="badge">{{ $book->bookmarks->count() }}</span>
-                    </a>
+                    </button>
                     @endif
                 </div>
             </div>
