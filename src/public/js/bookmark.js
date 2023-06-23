@@ -18,6 +18,7 @@ function bookmark(bookId) {
     });
 }
 
+
 function unbookmark(bookId) {
   $.ajax({
     headers: {
