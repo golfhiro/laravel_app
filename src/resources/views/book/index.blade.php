@@ -1,9 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            技術本一覧
-        </h2>
-        <x-message :message="session('message')" />
+        <div class="flex items-center justify-between">
+            <div>
+                <h2 class=" font-semibold text-xl text-gray-800 leading-tight">
+                    技術本一覧</h2>
+            </div>
+            <div class="mx-auto message">
+                <x-message :message="session('message')" />
+            </div>
+        </div>
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
