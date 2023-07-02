@@ -45,19 +45,21 @@
 
                     <!-- いいねボタン -->
                     @if($bookmark)
-                        <button class="bookmark bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" onclick="unbookmark('{{ $book->id }}')">
+                    <button class="bookmark bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" onclick="unbookmark('{{ $book->id }}')">
                         いいね解除！
                         <span class="badge">{{ $book->bookmarks->count() }}</span>
-                        </button>
+                    </button>
                     @else
-                        <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" onclick="bookmark('{{ $book->id }}')">
+                    <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" onclick="bookmark('{{ $book->id }}')">
                         いいね！
                         <span class="badge">{{ $book->bookmarks->count() }}</span>
-                        </button>
+                    </button>
                     @endif
                 </div>
             </div>
         </div>
+
+        <!-- コメント機能 start -->
         <div class="bg-white rounded-lg shadow-md mb-4 p-4">
             <form method="post" action="{{ route('comment.store') }}">
                 @csrf
@@ -66,13 +68,13 @@
                     <textarea name="body" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200" rows="5" placeholder="コメントを入力する">{{ old('body') }}</textarea>
                 </div>
                 <div class="text-right">
-                    <button type="submit" class="px-4 py-2 bg-indigo-500 text-white font-semibold rounded-md hover:bg-indigo-600">コメントする</button>
+                    <button type="submit" class="addcomment px-4 py-2 bg-indigo-500 text-white font-semibold rounded-md hover:bg-indigo-600">コメントする</button>
                 </div>
             </form>
         </div>
-
         @if($book->comments->count() > 0)
-        @foreach($book->comments()->orderBy('created_at', 'desc')->get() as $comment)
+        <div id="comment-data"></div>
+        @foreach($comments as $comment)
         <div class="bg-white rounded-lg shadow-md mb-4 p-4">
             <div class="flex items-center mb-2">
                 <span class="text-gray-700 font-semibold">{{ $comment->user->name ?? '削除されたユーザー' }}</span>
@@ -90,5 +92,7 @@
             <p class="text-gray-700">コメントはまだありません。</p>
         </div>
         @endif
+        <!-- コメント機能 end -->
+
     </div>
 </x-app-layout>

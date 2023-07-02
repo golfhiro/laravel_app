@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Tag;
 use App\Models\Bookmark;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -19,7 +20,6 @@ class BookController extends Controller
         if ($search) {
             $query->where('title', 'like', '%' . $search . '%');
         }
-
         $books = $query->orderByDesc('created_at')->paginate(6);
         return view('book.index', compact('books', 'user', 'search'));
     }
@@ -59,7 +59,9 @@ class BookController extends Controller
 
         $bookmark = Bookmark::where('book_id', $book->id)->where('user_id', auth()->user()->id)->first();
 
-        return view('book.show', compact('book', 'user', 'bookmark'));
+        $comments = Comment::where('book_id', $book->id)->orderBy('created_at', 'desc')->get();
+
+        return view('book.show', compact('book', 'user', 'bookmark', 'comments'));
     }
 
     public function edit(Book $book)
