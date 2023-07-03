@@ -28,6 +28,11 @@ class Book extends Model
         return $this->belongsTo(Tag::class);
     }
 
+    public function technology_tags()
+    {
+        return $this->belongsToMany(TechnologyTag::class, 'book_technology_tags');
+    }
+
     protected $fillable = [
         'title',
         'description',

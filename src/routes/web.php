@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('book', BookController::class);
+Route::get('/book/technology_tag/{tag}',[App\Http\Controllers\BookController::class, 'indexByTag'])->name('book.index.technology_tag');
 
 Route::post('/book/comment/store', [App\Http\Controllers\CommentController::class, 'store'])->name('comment.store');
 
