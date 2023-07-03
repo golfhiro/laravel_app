@@ -24,6 +24,17 @@ class BookController extends Controller
         return view('book.index', compact('books', 'user', 'search'));
     }
 
+    public function indexByTag($tag)
+    {
+        $user = auth()->user();
+
+        $books = Book::whereHas('technology_tags', function ($query) use ($tag) {
+            $query->where('name', $tag);
+        })->orderByDesc('created_at')->paginate(6);
+
+        return view('book.index', compact('books', 'user'));
+    }
+
     public function create()
     {
         return view('book.create');

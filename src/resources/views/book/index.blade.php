@@ -34,7 +34,7 @@
                     <hr class="my-4">
                     <div class="text-right">
                         @foreach($book->technology_tags as $technologyTag)
-                            <span class="inline-block bg-violet-600 text-white text-sm font-bold px-2 py-1 rounded-full">{{ $technologyTag->name }}</span>
+                        <a href="{{ route('book.index.technology_tag', $technologyTag->name) }}" class="inline-block bg-violet-600 text-white text-sm font-bold px-2 py-1 rounded-full">{{ $technologyTag->name }}</a>
                         @endforeach
                     </div>
                     @if($book->imasge)
