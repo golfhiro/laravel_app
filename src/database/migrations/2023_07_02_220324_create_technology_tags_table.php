@@ -23,6 +23,9 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('book_technology_tags', function (Blueprint $table) {
+            $table->dropForeign('book_technology_tags_technology_tag_id_foreign');
+        });
         Schema::dropIfExists('technology_tags');
     }
 };

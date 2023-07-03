@@ -7,6 +7,7 @@ use App\Models\Bookmark;
 use App\Models\Comment;
 use App\Models\TechnologyTag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
@@ -42,6 +43,8 @@ class BookController extends Controller
 
     public function store(Request $request)
     {
+        DB::beginTransaction();
+
         $inputs = $request->validate([
             'title' => 'required|max:100',
             'description' => 'required|max:1000',
@@ -51,7 +54,6 @@ class BookController extends Controller
         $book->title = $inputs['title'];
         $book->description = $inputs['description'];
         $book->url = $request->url;
-
         $book->user_id = auth()->user()->id;
         if (request('image')) {
             $original = request()->file('image')->getClientOriginalName();
@@ -60,23 +62,34 @@ class BookController extends Controller
             $book->image = $name;
         }
 
-        $book->save();
+        try {
 
-        preg_match_all('/#([a-zA-z0-90-９ぁ-んァ-ヶ亜-熙]+)/u', $request->technology_tags, $match);
+            $book->save();
 
-        $technology_tags = [];
-        foreach ($match[1] as $tag) {
-            $record = TechnologyTag::firstOrCreate(['name' => $tag]);
-            array_push($technology_tags, $record);
-        };
+            preg_match_all('/#([a-zA-z0-90-９ぁ-んァ-ヶ亜-熙]+)/u', $request->technology_tags, $match);
 
-        $technology_tags_id = [];
-        foreach ($technology_tags as $tag) {
-            array_push($technology_tags_id, $tag['id']);
-        };
-        $book->technology_tags()->attach($technology_tags_id);
+            $technology_tags = [];
+            foreach ($match[1] as $tag) {
+                $record = TechnologyTag::firstOrCreate(['name' => $tag]);
+                array_push($technology_tags, $record);
+            };
 
-        return redirect()->route('book.index')->with('message', '投稿しました');
+            $technology_tags_id = [];
+            foreach ($technology_tags as $tag) {
+                array_push($technology_tags_id, $tag['id']);
+            };
+            $book->technology_tags()->attach($technology_tags_id);
+
+            DB::commit();
+
+            return redirect()->route('book.index')->with('message', '投稿しました');
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            $error_code = $e->getMessage();
+            $error_message = $error_code === '1000' ? '処理に失敗しました。' : '登録できませんでした';
+            return response()->json(['error' => $error_message], 500);
+        }
     }
 
     public function show(Book $book)
@@ -119,8 +132,21 @@ class BookController extends Controller
 
     public function destroy(Book $book)
     {
-        $book->comments()->delete();
-        $book->delete();
-        return redirect()->route('book.index')->with('message', '投稿を削除しました');
+        DB::beginTransaction();
+
+        try {
+            $book->technology_tags()->detach();
+            $book->comments()->delete();
+            $book->delete();
+
+            DB::commit();
+
+            return redirect()->route('book.index')->with('message', '投稿を削除しました');
+        } catch (\Exception $e) {
+            DB::rollback();
+            $error_code = $e->getMessage();
+            $error_message = $error_code === '1000' ? '処理に失敗しました。' : '削除できませんでした';
+            return response()->json(['error' => $error_message], 500);
+        }
     }
 }
