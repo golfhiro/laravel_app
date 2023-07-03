@@ -4,15 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
-
-class Tag extends Model
+class TechnologyTag extends Model
 {
-    protected $guarded = ['id'];
+    use HasFactory;
 
     public function books()
     {
-        return $this->hasMany(Book::class, 'tag_id', 'id');
+        return $this->belongsToMany(Book::class, 'book_technology_tags');
     }
+
+    protected $fillable = ['name'];
 }
