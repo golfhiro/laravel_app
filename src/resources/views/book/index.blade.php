@@ -33,9 +33,11 @@
                     </h1>
                     <hr class="my-4">
                     <div class="text-right">
-                        <span class="inline-block bg-violet-600 text-white text-sm font-bold px-2 py-1 rounded-full">{{ $book->tag->name }}</span>
+                        @foreach($book->technology_tags as $technologyTag)
+                            <span class="inline-block bg-violet-600 text-white text-sm font-bold px-2 py-1 rounded-full">{{ $technologyTag->name }}</span>
+                        @endforeach
                     </div>
-                    @if($book->image)
+                    @if($book->imasge)
                     <img src="{{ asset('storage/images/'.$book->image) }}" class="mx-auto my-6" style="height:300px;">
                     @endif
                     <div class="text-sm font-semibold flex justify-end">

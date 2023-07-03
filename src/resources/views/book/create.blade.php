@@ -26,14 +26,11 @@
                     <textarea name="description" class="w-auto py-2 border border-gray-300 rounded-md" id="body" cols="30" rows="10" placeholder="おすすめする理由を入力してください">{{old('description')}}</textarea>
                 </div>
 
-                <div class="flex flex-col gap-2">
-                    <label for="tag_id" class="font-semibold mt-4">技術タグ</label>
-                    <select class="form-select w-auto py-2 px-4 border border-gray-300 rounded-md" name="tag_id" required>
-                        <option value="disabled selected">必ず選択していください</option>
-                        @foreach($tags as $tag)
-                        <option value="{{ $tag->id }}" @if (isset($book->tag_id) && ($book->tag_id === $tag->id)) selected @endif>{{ $tag->name }}</option>
-                        @endforeach
-                    </select>
+                <div class="md:flex items-center mt-8">
+                    <div class="w-full flex flex-col">
+                        <label for="technology_tag" class="font-semibold leading-none mt-4">技術タグ</label>
+                        <input type="text" name="technology_tags" class="w-auto py-2 placeholder-gray-300 border border-gray-300 rounded-md" id="technology_tag" value="{{old('technology_tags')}}" placeholder="例)#Laravel #php">
+                    </div>
                 </div>
 
                 <div class="w-full flex flex-col">

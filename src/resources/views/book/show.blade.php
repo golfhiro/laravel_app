@@ -37,7 +37,7 @@
                     </div>
                     <div>
                         <h2 class="text-lg font-semibold">URL</h2>
-                        <p class="text-gray-600 py-4 whitespace-pre-line">{{ $book->url }}</p>
+                        <a href="{{ $book->url }}" class="text-indigo-500 inline-flex items-center md:mb-3 lg:mb-0" target="_blank">{{ $book->url }}</a>
                     </div>
                     <div class="text-sm font-semibold flex justify-end">
                         <p>{{ $book->user->name }} • {{ $book->created_at->diffForHumans() }}</p>
