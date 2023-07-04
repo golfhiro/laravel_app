@@ -7,6 +7,7 @@ use App\Models\Bookmark;
 use App\Models\Comment;
 use App\Models\TechnologyTag;
 use Illuminate\Http\Request;
+use App\Http\Requests\BookRequest;
 use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
@@ -41,15 +42,11 @@ class BookController extends Controller
         return view('book.create');
     }
 
-    public function store(Request $request)
+    public function store(BookRequest $request)
     {
         DB::beginTransaction();
 
-        $inputs = $request->validate([
-            'title' => 'required|max:100',
-            'description' => 'required|max:1000',
-            'technology_tags' => 'required',
-        ]);
+        $inputs = $request->validated();
 
         $book = new Book();
         $book->title = $inputs['title'];
