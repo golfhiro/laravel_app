@@ -48,6 +48,7 @@ class BookController extends Controller
         $inputs = $request->validate([
             'title' => 'required|max:100',
             'description' => 'required|max:1000',
+            'technology_tags' => 'required',
         ]);
 
         $book = new Book();
@@ -112,20 +113,26 @@ class BookController extends Controller
     {
         $inputs = $request->validate([
             'title' => 'required|max:100',
-            'description' => 'required|max:1000'
+            'description' => 'required|max:1000',
+            'technology_tags' => 'required',
         ]);
 
         $book->title = $inputs['title'];
         $book->description = $inputs['description'];
 
-        if (request('image')) {
-            $original = request()->file('image')->getClientOriginalName();
-            $name = date('Ymd_His') . '_' . $original;
-            $file = request()->file('image')->move('storage/images', $name);
-            $book->image = $name;
-        }
-
         $book->save();
+
+        if ($inputs['technology_tags']) {
+            $tags = explode(' ', $inputs['technology_tags']);
+            $tagIds = [];
+
+            foreach ($tags as $tagName) {
+                $tag = TechnologyTag::firstOrCreate(['name' => $tagName]);
+                $tagIds[] = $tag->id;
+            }
+
+            $book->technology_tags()->sync($tagIds);
+        }
 
         return redirect()->route('book.show', $book)->with('message', '投稿を更新しました');
     }
