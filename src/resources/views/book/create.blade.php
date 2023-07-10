@@ -29,7 +29,7 @@
                 <div class="md:flex items-center mt-8">
                     <div class="w-full flex flex-col">
                         <label for="technology_tag" class="font-semibold leading-none mt-4">技術タグ</label>
-                        <input type="text" name="technology_tags" class="w-auto py-2 placeholder-gray-300 border border-gray-300 rounded-md" id="technology_tag" value="{{old('technology_tags')}}" placeholder="例)#Laravel #php">
+                        <input type="text" name="technology_tags" class="w-auto py-2 placeholder-gray-300 border border-gray-300 rounded-md" id="technology_tag" value="{{old('technology_tags')}}" placeholder="例)#laravel #php">
                     </div>
                 </div>
 

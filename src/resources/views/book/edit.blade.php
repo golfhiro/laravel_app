@@ -29,7 +29,7 @@
 
                 <div class="md:flex items-center mt-8">
                     <div class="w-full flex flex-col">
-                        <label for="technology_tags" class="font-semibold leading-none mt-4">技術タグ（タグの間は半角空白スペースを空けるようにしてください 例: PHP Laravel）</label>
+                        <label for="technology_tags" class="font-semibold leading-none mt-4">技術タグ（タグの間は半角空白スペースを空けるようにしてください 例: php laravel）</label>
                         <input type="text" name="technology_tags" class="w-auto py-2 border border-gray-300 rounded-md" id="technology_tags" value="{{ old('technology_tags', $book->technology_tags->pluck('name')->implode(' ')) }}">
                     </div>
                 </div>

@@ -34,10 +34,10 @@
                     <hr class="my-4">
                     <div class="text-right">
                         @foreach($book->technology_tags as $technologyTag)
-                        <a href="{{ route('book.index.technology_tag', $technologyTag->name) }}" class="inline-block bg-violet-600 text-white text-sm font-bold px-2 py-1 rounded-full">{{ $technologyTag->name }}</a>
+                        <a href="{{ route('book.index.technology_tag', $technologyTag->name) }}" class="inline-block bg-violet-600 text-white text-sm font-bold px-2 py-1 rounded-full mt-2">{{ $technologyTag->name }}</a>
                         @endforeach
                     </div>
-                    @if($book->imasge)
+                    @if($book->image)
                     <img src="{{ asset('storage/images/'.$book->image) }}" class="mx-auto my-6" style="height:300px;">
                     @endif
                     <div class="text-sm font-semibold flex justify-end">
